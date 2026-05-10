@@ -172,11 +172,11 @@ window.onload = () => {
     }
   });
   previewHTML += `\n<span class="fg"></span>`;
-  
+
   previewHTML += `\n<span class="fg">D</span>`;
   previewHTML += `\n<span class="fg">P G</span>`;
   previewHTML += `\n<span class="hi2">S</span><span class="fg">CPI</span>`;
-  previewHTML += `\n<span class="fg">  TT</span>`;
+  previewHTML += `\n<span class="fg">X  TT</span>`;
   document.getElementById('pv').innerHTML = previewHTML;
   buildColorInputs();
   renderG();
