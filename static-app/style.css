@@ -60,4 +60,4 @@ button:active { border-color: var(--win-border-dark) var(--win-border-light) var
     padding: 0;
 }
 .gallery { margin-top: 15px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
-.g-item { border: 1px solid #000; padding: 5px; cursor: pointer; font-size: 10px; text-align: center; }
+.g-item { border: 1px solid #000; padding: 5px; font-size: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; }

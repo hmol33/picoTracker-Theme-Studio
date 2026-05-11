@@ -119,6 +119,14 @@ function saveG() {
   renderG();
 }
 
+// Remove a gallery item by index
+function removeG(index) {
+  const gallery = JSON.parse(localStorage.getItem('g') || '[]');
+  gallery.splice(index, 1);
+  localStorage.setItem('g', JSON.stringify(gallery));
+  renderG();
+}
+
 // Render gallery thumbnails
 function renderG() {
   const container = document.getElementById('gal');
@@ -129,8 +137,13 @@ function renderG() {
     div.className = 'g-item';
     div.style.background = t.c.BACKGROUND;
     div.style.color = t.c.FOREGROUND;
-    div.textContent = t.n;
-    div.onclick = () => {
+
+    // Text label (click to load)
+    const label = document.createElement('span');
+    label.style.flex = '1';
+    label.textContent = t.n;
+    label.style.cursor = 'pointer';
+    label.onclick = () => {
       for (const k in t.c) {
         const inp = document.getElementById('in_' + k);
         if (inp) inp.value = t.c[k];
@@ -138,6 +151,24 @@ function renderG() {
       }
       document.getElementById('tn').value = t.n;
     };
+    div.appendChild(label);
+
+    // Delete button
+    const del = document.createElement('button');
+    del.textContent = '[X]';
+    del.style.fontSize = '10px';
+    del.style.fontWeight = 'bold';
+    del.style.padding = '2px 6px';
+    del.style.marginLeft = 'auto';
+    del.style.cursor = 'pointer';
+    del.onclick = (e) => {
+      e.stopPropagation();
+      if (confirm('Remove "' + t.n + '" from gallery?')) {
+        removeG(i);
+      }
+    };
+    div.appendChild(del);
+
     container.appendChild(div);
   });
 }
