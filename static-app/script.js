@@ -83,6 +83,7 @@ function rand() {
 function upload() {
   const file = document.getElementById('fileIn').files[0];
   if (!file) return;
+  document.getElementById('tn').value = file.name.replace(/\.[^.]+$/, '');
   const reader = new FileReader();
   reader.onload = function(e) {
     const parser = new DOMParser();
