@@ -16,9 +16,43 @@ const defaultColors = {
   EMPHASISCOLOR: "#00AA55"
 };
 
+/* Multi-screen state */
+let currentScreen = 'song';
+
+function showScreen(name) {
+  currentScreen = name;
+  document.getElementById('screen-project').style.display = (name === 'project') ? 'block' : 'none';
+  document.getElementById('screen-song').style.display = (name === 'song') ? 'block' : 'none';
+  document.getElementById('screen-chain').style.display = (name === 'chain') ? 'block' : 'none';
+
+  // Update tab highlight
+  document.querySelectorAll('.screen-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.screen === name);
+  });
+}
+
+// Keyboard navigation (Up/Down/Left/Right)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowUp') {
+    if (currentScreen === 'song') showScreen('project');
+    e.preventDefault();
+  } else if (e.key === 'ArrowDown') {
+    if (currentScreen === 'project') showScreen('song');
+    e.preventDefault();
+  } else if (e.key === 'ArrowLeft') {
+    if (currentScreen === 'chain') showScreen('song');
+    else if (currentScreen === 'song') ;// no screen to left
+    e.preventDefault();
+  } else if (e.key === 'ArrowRight') {
+    if (currentScreen === 'song') showScreen('chain');
+    else if (currentScreen === 'project') showScreen('chain');
+    e.preventDefault();
+  }
+});
+
 // Utility: update CSS variable for a color key
 function up(k, v) {
-  document.getElementById('pv').style.setProperty('--' + k, v);
+  document.getElementById('previewArea').style.setProperty('--' + k, v);
 }
 
 // Generate a random hex color string
@@ -173,11 +207,11 @@ window.onload = () => {
   });
   previewHTML += `\n<span class="fg"></span>`;
 
-  previewHTML += `\n<span class="fg">D</span>`;
-  previewHTML += `\n<span class="fg">P G</span>`;
-  previewHTML += `\n<span class="hi2">S</span><span class="fg">CPI</span>`;
-  previewHTML += `\n<span class="fg">X  TT</span>`;
-  document.getElementById('pv').innerHTML = previewHTML;
+  previewHTML += `\n<span class="fg"><span class="hi1">D</span></span>`;
+  previewHTML += `\n<span class="fg"><span class="hi1">P</span><span class="fg"> G</span></span>`;
+  previewHTML += `\n<span class="fg"><span class="hi2">S</span><span class="fg">CPI</span></span>`;
+  previewHTML += `\n<span class="fg"><span class="hi2">M</span><span class="fg"> T T</span></span>`;
+  document.getElementById('screen-song').innerHTML = previewHTML;
   buildColorInputs();
   renderG();
 };

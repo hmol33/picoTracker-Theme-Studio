@@ -21,11 +21,68 @@
   </div>
 
   <div style="display:flex; flex-direction:column; gap:20px;">
-    <div class="window">
+    <div class="window" style="position:relative;">
       <div class="title-bar"><span>Preview_Monitor</span></div>
-      <div class="preview" id="pv">
-        <span class="fg">song sad-fog</span>                         <span class="info">[c++f]</span>
-        <!-- tracker rows placeholder (filled by JS if needed) -->
+      <div class="preview-area" id="previewArea">
+        <div class="preview-inner">
+
+        <!-- SCREEN 1: Project (above) -->
+        <div class="preview" id="screen-project" style="display:none;">
+Project ABE [FUL]
+
+
+tempo: 400 [190]
+transpose: 00
+scale: None (Chromatic)
+scale root: C
+
+Sample Pool
+Remove Unused Samples
+Remove Unused Instruments
+
+project: ABE
+Load Save New Random
+Render: Mixdown Stems
+
+
+
+<span class="fg"><span class="hi1">D</span></span>
+<span class="fg"><span class="hi1">P</span><span class="fg"> G</span></span>
+<span class="fg"><span class="hi2">S</span><span class="fg">CPI</span></span>
+<span class="fg"><span class="hi2">M</span><span class="fg"> TT</span></span>
+        </div>
+
+        <!-- SCREEN 2: Song (center/cur) -->
+        <div class="preview" id="screen-song">
+<span class="fg">song sad-fog</span>                         <span class="info">[c++f]</span>
+<!-- tracker rows placeholder (filled by JS if needed) -->
+        </div>
+
+        <!-- SCREEN 3: Chain (right) -->
+        <div class="preview" id="screen-chain" style="display:none;">
+Chain 00 [FUL]
+<span class="fg">00</span> <span class="fg">00</span> <span class="fg">00</span>
+<span class="fg">01</span> <span class="fg">01</span> <span class="fg">00</span>
+<span class="fg">02</span> <span class="fg">03</span> <span class="fg">00</span>
+<span class="fg">03</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">04</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">05</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">06</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">07</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">08</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">09</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">0A</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">0B</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">0C</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">0D</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">0E</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg">0F</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="fg"><span class="hi1">D</span></span>
+<span class="fg"><span class="hi1">P</span><span class="fg"> G</span></span>
+<span class="fg"><span class="hi2">S</span><span class="fg">CPI</span></span>
+<span class="fg"><span class="hi2">M</span><span class="fg"> T T</span></span>
+        </div>
+        </div>
       </div>
     </div>
     <div class="window">
