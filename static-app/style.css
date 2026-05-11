@@ -17,9 +17,10 @@ button { background: var(--win-bg); border: 2px solid; border-color: var(--win-b
 button:active { border-color: var(--win-border-dark) var(--win-border-light) var(--win-border-light) var(--win-border-dark); }
 .preview-area {
     position: relative;
-    width: 540px;
+    width: 32em;
     height: 440px;
     box-sizing: border-box;
+    font-size: 19px;
 }
 .preview-inner {
     position: absolute;
@@ -27,7 +28,6 @@ button:active { border-color: var(--win-border-dark) var(--win-border-light) var
     left: 0;
     right: 0;
     bottom: 0;
-    overflow: hidden;
 }
 .preview {
     width: 100%;
@@ -48,9 +48,12 @@ button:active { border-color: var(--win-border-dark) var(--win-border-light) var
 .preview .fg { color: var(--FOREGROUND); }
 .preview .hi1 { color: var(--HICOLOR1); }
 .preview .hi2 { color: var(--HICOLOR2); }
+.preview .accent { color: var(--ACCENTCOLOR); }
+.preview .accentalt { color: var(--ACCENTALTCOLOR); }
 .preview .info { color: var(--INFOCOLOR); }
 .preview .warn { color: var(--WARNCOLOR); }
 .preview .error { color: var(--ERRORCOLOR); }
+.preview .emphasis { color: var(--EMPHASISCOLOR); }
 .preview .cursor {
     background: var(--HICOLOR2);
     color: var(--BACKGROUND);
