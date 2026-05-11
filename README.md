@@ -2,4 +2,4 @@
 picoTracker Theme Studio
 
 
-Use in [online here](https://itsdarklikehell.github.io/picoTracker-Theme-Studio/).
+Use [online here](https://itsdarklikehell.github.io/picoTracker-Theme-Studio/).
