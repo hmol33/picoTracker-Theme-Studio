@@ -1,0 +1,15 @@
+Project ABE [FUL]
+tempo: 400 [190]
+transpose: 00
+scale: None (Chromatic)
+scale root: C
+Sample Pool
+Remove Unused Samples
+Remove Unused Instruments
+project: ABE
+Load Save New Random
+Render: Mixdown Stems
+D
+P G
+SCPI
+M TT

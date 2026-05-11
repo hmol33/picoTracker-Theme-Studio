@@ -1,0 +1,12 @@
+Device [FUL]
+MIDI device: OFF
+MIDI sync: Off
+Remote UI: On
+Display brightness: ff
+Output volume: 40
+Theme settings
+Update firmware
+D
+P G Battery health: 100%
+SCPI
+M TT Build 2.1-BETA1r_003

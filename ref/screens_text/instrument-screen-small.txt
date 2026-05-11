@@ -1,0 +1,24 @@
+Instrument 01 [FUL]
+Type: SAMPLE
+Import Export
+name:
+sample: rx17 bongo l.wav
+volume: 128 [80]
+pan: 7F
+root note: C 3
+detune: 7F
+drive: FF
+crush: 16
+downsample: 0
+flt cut/res: FF 00
+type: 00
+Mode: original
+interpolation: linear
+loop mode: none
+start: 0000000
+loop start: 0000000
+loop end: 0000000
+D
+P G
+SCPI automation: false
+M TT table: --
