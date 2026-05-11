@@ -21,9 +21,10 @@ let currentScreen = 'song';
 
 function showScreen(name) {
   currentScreen = name;
-  document.getElementById('screen-project').style.display = (name === 'project') ? 'block' : 'none';
-  document.getElementById('screen-song').style.display = (name === 'song') ? 'block' : 'none';
-  document.getElementById('screen-chain').style.display = (name === 'chain') ? 'block' : 'none';
+  // Show only the preview matching the requested screen
+  document.querySelectorAll('.preview').forEach(p => {
+    p.style.display = p.dataset.screen === name ? 'block' : 'none';
+  });
 
   // Update tab highlight
   document.querySelectorAll('.screen-tab').forEach(t => {
@@ -31,21 +32,26 @@ function showScreen(name) {
   });
 }
 
+// Screen navigation map: screen -> [ArrowLeft, ArrowUp, ArrowDown, ArrowRight]
+const screenNav = {
+  project: { ArrowLeft: null,   ArrowUp: null,    ArrowDown: 'song',  ArrowRight: 'chain' },
+  song:    { ArrowLeft: null,   ArrowUp: 'project', ArrowDown: null,  ArrowRight: 'chain' },
+  chain:   { ArrowLeft: 'song', ArrowUp: 'project', ArrowDown: null,  ArrowRight: null }
+};
+
 // Keyboard navigation (Up/Down/Left/Right)
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') {
-    if (currentScreen === 'song') showScreen('project');
-    e.preventDefault();
-  } else if (e.key === 'ArrowDown') {
-    if (currentScreen === 'project') showScreen('song');
-    e.preventDefault();
-  } else if (e.key === 'ArrowLeft') {
-    if (currentScreen === 'chain') showScreen('song');
-    else if (currentScreen === 'song') ;// no screen to left
-    e.preventDefault();
-  } else if (e.key === 'ArrowRight') {
-    if (currentScreen === 'song') showScreen('chain');
-    else if (currentScreen === 'project') showScreen('chain');
+  // Ignore arrow keys when the user is editing text
+  const tag = e.target.tagName.toLowerCase();
+  if (tag === 'input' || tag === 'textarea' || tag === 'select' ||
+      e.target.isContentEditable) {
+    return;
+  }
+
+  const nav = screenNav[currentScreen];
+  const target = nav?.[e.key];
+  if (typeof target === 'string') {
+    showScreen(target);
     e.preventDefault();
   }
 });
