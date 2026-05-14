@@ -21,11 +21,111 @@
   </div>
 
   <div style="display:flex; flex-direction:column; gap:20px;">
-    <div class="window">
+    <div class="window" style="position:relative;">
       <div class="title-bar"><span>Preview_Monitor</span></div>
-      <div class="preview" id="pv">
-        <span class="fg">song sad-fog</span>                         <span class="info">[c++f]</span>
-        <!-- tracker rows placeholder (filled by JS if needed) -->
+      <div class="preview-area" id="previewArea">
+        <div class="preview-inner">
+
+        <!-- SCREEN 1: Project -->
+        <!-- Color mapping (from ref/ProjectView.cpp DrawView()):
+             CD_NORMAL  (FOREGROUND) → title "Project oneCycAc", all field labels + values
+                                → action buttons (Sample Pool, Load, Save, etc.)
+                                → static fields ("Render:"), footer text (D, P G, SCPI, M TT)
+             INFOCOLOR  (INFOCOLOR)  → status indicator "[+++]"
+        -->
+        <div class="preview" id="screen-project" data-screen="project" style="display:none;"><span class="fg">Project oneCycAc</span>           <span class="info">[+++]</span>
+
+
+     <span class="fg">tempo:</span><span class="emphasis"> 400 [190]</span>
+     <span class="fg">transpose:</span><span class="emphasis"> 00</span>
+     <span class="fg">scale:</span><span class="emphasis"> None (Chromatic)</span>
+     <span class="fg">scale root:</span><span class="emphasis"> C</span>
+     
+     <span class="fg">Sample Pool</span>
+     <span class="fg">Remove Unused Samples</span>
+     <span class="fg">Remove Unused Instruments</span>
+     
+     <span class="fg">project:</span><span class="emphasis"> oneCycAc</span>
+     <span class="fg">Load Save New Random</span>
+     <span class="fg">Render: Mixdown Stems</span>
+     
+
+
+
+<span class="fg">D</span>
+<span class="fg"><span class="hi1">P</span> G</span>
+<span class="fg">SCPI</span>
+<span class="fg">M TT</span>
+        </div>
+
+        <!-- SCREEN 2: Song -->
+        <!-- Color mapping (from SongView.cpp):
+             CD_NORMAL  (FOREGROUND) → data cells, footer text
+             CD_HILITE1 (HICOLOR1)  → row numbers (rows 0-3, 8-B), active footer "S"
+             CD_ACCENT  (ACCENTCOLOR)   → row numbers (rows 4-7, C-F)
+             CD_ACCENTALT (ACCENTALTCOLOR) → row numbers (rows C-F)
+             HICOLOR2   (HICOLOR2)  → cursor cell (inverse)
+             INFOCOLOR  (INFOCOLOR) → status "[+++]"
+        -->
+        <div class="preview" id="screen-song" data-screen="song"><span class="fg">song sad-fog</span>               <span class="info">[+++]</span>
+
+<span class="accent">  00</span> <span class="cursor">00</span> <span class="fg">-- -- -- -- -- --</span>
+<span class="accent">  01</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accent">  02</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accent">  03</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accentalt">  04</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accentalt">  05</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accentalt">  06</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accentalt">  07</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accent">  08</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accent">  09</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accent">  0A</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accent">  0B</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accentalt">  0C</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accentalt">  0D</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accentalt">  0E</span> <span class="fg">-- -- -- -- -- -- --</span>
+<span class="accentalt">  0F</span> <span class="fg">-- -- -- -- -- -- --</span>
+
+<span class="fg">D</span>
+<span class="fg">P G</span>
+<span class="fg"><span class="hi1">S</span>CPI</span>
+<span class="fg">M TT</span>
+       </div>
+
+        <!-- SCREEN 3: Chain -->
+        <!-- Color mapping (from ref/ChainView.cpp):
+             CD_NORMAL  (FOREGROND) → phrase data, transpose values, footer text
+             CD_HILITE1 (HICOLOR1)  → cursor inverse (invert highlight)
+             CD_ACCENT  (ACCENTCOLOR)   → row numbers (rows 0-3, 8-B), playing position ">"
+             CD_ACCENTALT (ACCENTALTCOLOR) → row numbers (rows 4-7, C-F), muted position "-"
+             INFOCOLOR  (INFOCOLOR) → status "[FUL]"
+        -->
+        <div class="preview" id="screen-chain" data-screen="chain" style="display:none;"><span class="fg">Chain 00</span><span class="info">                   [FUL]</span>
+
+<span class="accent">  00</span> <span class="fg">00</span> <span class="fg">00</span>
+<span class="accent">  01</span> <span class="fg">01</span> <span class="fg">00</span>
+<span class="accent">  02</span> <span class="fg">03</span> <span class="fg">00</span>
+<span class="accent">  03</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accentalt">  04</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accentalt">  05</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accentalt">  06</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accentalt">  07</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accent">  08</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accent">  09</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accent">  0A</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accent">  0B</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accentalt">  0C</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accentalt">  0D</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accentalt">  0E</span> <span class="fg">--</span> <span class="fg">00</span>
+<span class="accentalt">  0F</span> <span class="fg">--</span> <span class="fg">00</span>
+
+<span class="fg">D</span>
+<span class="fg">P G</span>
+<span class="fg">S<span class="hi1">C</span>PI</span>
+<span class="fg">M TT</span>
+        </div>
+
+        </div>
       </div>
     </div>
     <div class="window">

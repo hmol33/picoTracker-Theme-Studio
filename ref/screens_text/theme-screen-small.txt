@@ -1,0 +1,16 @@
+ Theme Settings [FUL]
+     Import Export
+     Theme: Default
+  
+     Foreground D8 D8 D8
+     Background 00 00 00
+     Highlight1 00 50 80
+     Highlight2 30 70 90
+     Console 00 00 00
+     Cursor 00 00 00
+     Info 00 E4 70
+     Warning E8 EC 00
+     Error F8 50 50
+     Accent F0 84 00
+     AccentAlt F8 B8 00
+     Emphasis 78 78 78

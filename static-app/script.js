@@ -16,9 +16,49 @@ const defaultColors = {
   EMPHASISCOLOR: "#00AA55"
 };
 
+/* Multi-screen state */
+let currentScreen = 'song';
+
+function showScreen(name) {
+  currentScreen = name;
+  // Show only the preview matching the requested screen
+  document.querySelectorAll('.preview').forEach(p => {
+    p.style.display = p.dataset.screen === name ? 'block' : 'none';
+  });
+
+  // Update tab highlight
+  document.querySelectorAll('.screen-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.screen === name);
+  });
+}
+
+// Screen navigation map: screen -> [ArrowLeft, ArrowUp, ArrowDown, ArrowRight]
+const screenNav = {
+  project: { ArrowLeft: null,   ArrowUp: null,    ArrowDown: 'song',  ArrowRight: 'chain' },
+  song:    { ArrowLeft: null,   ArrowUp: 'project', ArrowDown: null,  ArrowRight: 'chain' },
+  chain:   { ArrowLeft: 'song', ArrowUp: 'project', ArrowDown: null,  ArrowRight: null }
+};
+
+// Keyboard navigation (Up/Down/Left/Right)
+document.addEventListener('keydown', (e) => {
+  // Ignore arrow keys when the user is editing text
+  const tag = e.target.tagName.toLowerCase();
+  if (tag === 'input' || tag === 'textarea' || tag === 'select' ||
+      e.target.isContentEditable) {
+    return;
+  }
+
+  const nav = screenNav[currentScreen];
+  const target = nav?.[e.key];
+  if (typeof target === 'string') {
+    showScreen(target);
+    e.preventDefault();
+  }
+});
+
 // Utility: update CSS variable for a color key
 function up(k, v) {
-  document.getElementById('pv').style.setProperty('--' + k, v);
+  document.getElementById('previewArea').style.setProperty('--' + k, v);
 }
 
 // Generate a random hex color string
@@ -49,6 +89,7 @@ function rand() {
 function upload() {
   const file = document.getElementById('fileIn').files[0];
   if (!file) return;
+  document.getElementById('tn').value = file.name.replace(/\.[^.]+$/, '');
   const reader = new FileReader();
   reader.onload = function(e) {
     const parser = new DOMParser();
@@ -84,6 +125,14 @@ function saveG() {
   renderG();
 }
 
+// Remove a gallery item by index
+function removeG(index) {
+  const gallery = JSON.parse(localStorage.getItem('g') || '[]');
+  gallery.splice(index, 1);
+  localStorage.setItem('g', JSON.stringify(gallery));
+  renderG();
+}
+
 // Render gallery thumbnails
 function renderG() {
   const container = document.getElementById('gal');
@@ -94,8 +143,13 @@ function renderG() {
     div.className = 'g-item';
     div.style.background = t.c.BACKGROUND;
     div.style.color = t.c.FOREGROUND;
-    div.textContent = t.n;
-    div.onclick = () => {
+
+    // Text label (click to load)
+    const label = document.createElement('span');
+    label.style.flex = '1';
+    label.textContent = t.n;
+    label.style.cursor = 'pointer';
+    label.onclick = () => {
       for (const k in t.c) {
         const inp = document.getElementById('in_' + k);
         if (inp) inp.value = t.c[k];
@@ -103,6 +157,24 @@ function renderG() {
       }
       document.getElementById('tn').value = t.n;
     };
+    div.appendChild(label);
+
+    // Delete button
+    const del = document.createElement('button');
+    del.textContent = '[X]';
+    del.style.fontSize = '10px';
+    del.style.fontWeight = 'bold';
+    del.style.padding = '2px 6px';
+    del.style.marginLeft = 'auto';
+    del.style.cursor = 'pointer';
+    del.onclick = (e) => {
+      e.stopPropagation();
+      if (confirm('Remove "' + t.n + '" from gallery?')) {
+        removeG(i);
+      }
+    };
+    div.appendChild(del);
+
     container.appendChild(div);
   });
 }
@@ -157,27 +229,6 @@ window.onload = () => {
   for (const k in defaultColors) {
     up(k, defaultColors[k]);
   }
-  // Populate preview monitor with tracker rows (static replica of original Jinja output)
-  const TRACKER_ROWS = ["00","01","02","03","04","05","06","07","08","09","0A","0B","0C","0D","0E","0F"];
-  let previewHTML = `<span class="fg">song sad-fog</span>                         <span class="info">[c++f]</span>`;
-  TRACKER_ROWS.forEach((row, idx) => {
-    if (idx === 0) {
-      previewHTML += `\n<span class="hi1">${row}</span>  <span class="cursor">00</span>`;
-    } else {
-      previewHTML += `\n<span class="hi1">${row}</span>  <span class="fg">--</span>`;
-    }
-    // add six placeholder '--' spans
-    for (let i = 0; i < 6; i++) {
-      previewHTML += `  <span class="fg">--</span>`;
-    }
-  });
-  previewHTML += `\n<span class="fg"></span>`;
-  
-  previewHTML += `\n<span class="fg">D</span>`;
-  previewHTML += `\n<span class="fg">P G</span>`;
-  previewHTML += `\n<span class="hi2">S</span><span class="fg">CPI</span>`;
-  previewHTML += `\n<span class="fg">  TT</span>`;
-  document.getElementById('pv').innerHTML = previewHTML;
   buildColorInputs();
   renderG();
 };
