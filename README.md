@@ -1,52 +1,40 @@
 # picoTracker-Theme-Studio
 
+<img src="https://img.shields.io/github/stars/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square&color=blue" alt="Stars">
+<img src="https://img.shields.io/github/forks/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square&color=green" alt="Forks">
+<img src="https://img.shields.io/github/license/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square" alt="License">
+
 A browser-based theme editor for the [picoTracker](https://github.com/synthetos/picoTracker) — design and export `.PTT` theme files without leaving your browser.
 
-## Try it online
+## Installatie
 
-Use the live editor here: <https://itsdarklikehell.github.io/picoTracker-Theme-Studio/>
+### Online gebruik
 
-## Run locally
+Gebruik de live editor hier: <https://itsdarklikehell.github.io/picoTracker-Theme-Studio/>
 
-The app is a static site. Serve the `static-app/` folder with any static web server, for example:
+### Lokaal draaien
 
 ```bash
-cd static-app
+git clone https://github.com/itsdarklikehell/picoTracker-Theme-Studio.git
+cd picoTracker-Theme-Studio/static-app
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000> in your browser.
+Dan open <http://localhost:8000> in je browser.
 
-## How it works
+## Gebruik
 
-- **Import** an existing `.PTT` theme file to load its colors.
-- **Edit / Randomize** the palette using the on-screen controls.
-- **Generate** a new `.PTT` theme file to download and flash to your picoTracker.
+1. Open de editor in je browser
+2. Kies een thema om te bewerken
+3. Pas kleuren, fonts en layout aan
+4. Exporteer als `.PTT` bestand
+5. Importeer het thema in picoTracker
 
-## Project layout
+## Bijdragers
 
-- `static-app/` — the static web app (HTML/CSS/JS) published to GitHub Pages.
-- `ref/` — reference screens and text used while building the preview.
+- [itsdarklikehell](https://github.com/itsdarklikehell) — Onderhouder
+- [synthetos](https://github.com/synthetos) — picoTracker creator
 
+## Licentie
 
----
-
-## 🎥 Gource Visualization
-
-De ontwikkelhistorie van dit project in een film:
-
-<video src="https://raw.githubusercontent.com/itsdarklikehell/picoTracker-Theme-Studio/main/gource.mp4" controls width="100%"></video>
-
-*De video wordt automatisch gegenereerd door de [Gource workflow](.github/workflows/gource.yml) bij elke push.*
-
-Lokale video genereren:
-```bash
-gource --max-files 1000 --key -800x600 \
-  --highlight-users --filename-time 3 --output-framerate 25 \
-  -s 0.6 --multi-sampling --auto-skip-seconds 0.1 \
-  --stop-at-end --hide mouse,progress -o gource.ppm
-
-ffmpeg -y -r 15 -f image2pipe -vcodec ppm -i gource.ppm \
-  -vcodec libx264 -preset medium -pix_fmt yuv420p \
-  -crf 1 -threads 0 -bf 0 gource.mp4
-```
+MIT — zie [LICENSE](LICENSE) voor details.
