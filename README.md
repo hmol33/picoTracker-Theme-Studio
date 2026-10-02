@@ -1,5 +1,13 @@
 # picoTracker-Theme-Studio
 
+
+## Development Visualization
+
+<video src="https://raw.githubusercontent.com/itsdarklikehell/picoTracker-Theme-Studio/main/gource.mp4" controls width="100%"></video>
+
+*Gource visualization showing the repository's commit history. See the [Gource workflow](.github/workflows/gource.yml) for details.*
+
+
 <img src="https://img.shields.io/github/stars/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square&color=blue" alt="Stars">
 <img src="https://img.shields.io/github/forks/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square&color=green" alt="Forks">
 <img src="https://img.shields.io/github/license/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square" alt="License">
