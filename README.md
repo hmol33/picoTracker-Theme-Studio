@@ -1,8 +1,17 @@
 # picoTracker-Theme-Studio
 
+
+## Development Visualization
+
+<video src="https://raw.githubusercontent.com/itsdarklikehell/picoTracker-Theme-Studio/main/gource.mp4" controls width="100%"></video>
+
+*Gource visualization showing the repository's commit history. See the [Gource workflow](.github/workflows/gource.yml) for details.*
+
+
 <img src="https://img.shields.io/github/stars/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square&color=blue" alt="Stars">
 <img src="https://img.shields.io/github/forks/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square&color=green" alt="Forks">
 <img src="https://img.shields.io/github/license/itsdarklikehell/picoTracker-Theme-Studio?style=flat-square" alt="License">
+<img src="https://img.shields.io/github/actions/workflow/status/itsdarklikehell/picoTracker-Theme-Studio/ci.yml?branch=main&label=CI&style=flat-square" alt="CI Status">
 
 A browser-based theme editor for the [picoTracker](https://github.com/synthetos/picoTracker) — design and export `.PTT` theme files without leaving your browser.
 
